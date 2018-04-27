@@ -1,0 +1,30 @@
+<a id="logout"(click)="logout()" href="#">Click Here to logout</a>
+
+<h3>Submit Your Review and the LM will understand if you are Happy</h3>
+<div  class="review">
+    <textarea [disabled]="isOnCheck" (keyup)="onKey($event)" placeholder="Write about your experience!!!" [(ngModel)]="ReviewText" rows="10" cols="120" #Review>
+    </textarea>
+    <p><b>Current Review:</b>{{Textvalues}}</p>
+</div>  
+<button [disabled]="!isValidText" (click)="onSubmitReview(Review.value)">Submit your Review</button>
+<div *ngIf="alertMsg" class="alert"> 
+    <strong>This is NOT a valid review please re-phrase it</strong> 
+</div>
+<div *ngIf="prediction.result != '9999' && prediction.valid ">
+<h3>This is the result of the prediction</h3>
+    
+    <div *ngIf="prediction.result == '0'">
+        <h3 class='prediction-bad'>This is really a bad review.CCS will contact ASAP for a better understanding of your review </h3>
+    </div>
+    <div *ngIf="prediction.result == '1'">
+        <h3 class='prediction-good'>This is really a good review Thank you </h3>
+    </div>
+    <div>
+        <h4>Was I Right or Was I Wrong?</h4>
+            <input type="radio" [(ngModel)]="reviewCheck"  name="pred" value="Right" (change)="onSelectionChange(1)" >Right
+            <br>
+            <input type="radio" [(ngModel)]="reviewCheck"  name="pred" value="Wrong" (change)="onSelectionChange(0)">Wrong
+            <br>
+             <button  [disabled]="!isButtonConfirmValid"  (click)="onSubmitCorrect(Review.value)"> Confirm </button>
+    </div>
+</div>

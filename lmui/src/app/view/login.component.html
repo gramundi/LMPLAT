@@ -1,0 +1,9 @@
+<div class="login" *ngIf="userAct===false">
+                        
+    <input [(ngModel)]="user.email" placeholder="Username" id="username"    type="text">
+    <input [(ngModel)]="user.password" placeholder="password" id="password" type="password">
+                        
+                <span>{{errorMsg}}</span>
+                <input (click)="login()" type="submit" value="Login">
+     
+</div>
